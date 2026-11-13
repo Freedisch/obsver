@@ -9,6 +9,8 @@ exporters:
     verbosity: basic
   prometheus:
     endpoint: 0.0.0.0:8889
+  otlphttp/tempo:
+      endpoint: http://tempo:4318
 
 service:
   pipelines:
@@ -17,7 +19,7 @@ service:
       exporters: [prometheus, debug]
     traces:
       receivers: [otlp]
-      exporters: [debug]
+      exporters: [otlphttp/tempo, debug]
     logs:
       receivers: [otlp]
       exporters: [debug]
