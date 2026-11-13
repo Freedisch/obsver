@@ -34,6 +34,32 @@ services:
     depends_on: [prometheus]
     restart: unless-stopped
 
+  tempo:
+    image: grafana/tempo:3.1.1
+    command:
+      - "-target=all"
+      - "-config.file=/etc/tempo.yaml"
+    volumes:
+      - ./tempo.yaml:/etc/tempo.yaml:ro
+      - tempo-data:/var/tempo
+    ports:
+      - "127.0.0.1:3200:3200"
+    restart: unless-stopped
+
+  loki:
+    image: grafana/loki:3.5.0
+    user: "0:0"
+    command:
+      - "-config.file=/etc/loki/loki.yaml"
+    volumes:
+      - ./loki.yaml:/etc/loki/loki.yaml:ro
+      - loki-data:/var/loki
+    ports:
+      - "127.0.0.1:3100:3100"
+    restart: unless-stopped
+
 volumes:
   prometheus-data:
   grafana-data:
+  tempo-data:
+  loki-data:
