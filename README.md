@@ -4,12 +4,8 @@ A local observability stack for a locally running Klex process. Klex sends
 OpenTelemetry data to the Collector, which routes each signal to a dedicated
 backend:
 
-```text
-Klex ──OTLP/HTTP──> OpenTelemetry Collector
-                       ├── metrics ──> Prometheus ──> Grafana
-                       ├── traces  ──> Tempo
-                       └── logs    ──> Loki
-```
+<img width="1447" height="1214" alt="image" src="https://github.com/user-attachments/assets/0132078d-10d1-40e7-80af-c75381ebcbf0" />
+
 
 The stack includes a pre-provisioned **Klex Insights — Agent Operations**
 dashboard for inference metrics.
